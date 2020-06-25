@@ -5,20 +5,25 @@ const FinishedQiuz = props => {
     return (
         <div className={classes.FinishedQiuz} >
             <ul>
-                <li>
-                    <strong>1.</strong>
-                   what you
-                   <i className={'fa fa-times ' + classes.error} />
-                </li>
+                {props.qiuz.map(( qiuzItem, index) => {
+                     const cls = [
+                       'fa',
+                       props.results[qiuzItem.id] === 'error' ? 'fa-times' : 'fa-check',
+                       classes[props.results[qiuzItem.id]]
+                    ]
+                    return (
+                        <li 
+                          key={index}
+                        >
+                         <strong>{index + 1}</strong>.&nbsp;
+                         {qiuzItem.question}
+                         <i className={cls.join(' ')} />
+                        </li>
+                    )
+                }
+                )}
             </ul>
-            <ul>
-                <li>
-                    <strong>2.</strong>
-                   what you
-                   <i className={'fa fa-check ' + classes.sucses} />
-                </li>
-            </ul>
-            <p>правильно 3 for 9</p>
+            <p>правильно 3 for {props.qiuz.lenght}</p>
             <div>
                 <button>пропустити</button>
             </div>

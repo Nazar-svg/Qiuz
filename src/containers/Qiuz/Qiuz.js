@@ -5,7 +5,8 @@ import FinishedQiuz from '../../components/FinishedQiuz/FinishedQiuz'
 
 class Qiuz extends Component {
     state = {
-        isFinished: true,
+        results: {},
+        isFinished: false,
         activeQestion: 0,
         answerState: null,
         qiuz: [
@@ -42,10 +43,14 @@ class Qiuz extends Component {
         }
 
         const question = this.state.qiuz[this.state.activeQestion]
-        
+        const results = this.state.results
         if (question.rightAnswerId === answerId) {
+            if(!results[answerId]) {
+                results[answerId] = 'sucses'
+            }
             this.setState({
-                answerState: { [answerId]: 'sucses' }
+                answerState: { [answerId]: 'sucses' },
+                results
             })
             const timeout = window.setTimeout(() => {
                 if (this.isQiuzFinished()) {
@@ -61,8 +66,10 @@ class Qiuz extends Component {
                 window.clearTimeout(timeout)
             }, 1000)
         } else {
+            results[answerId] = 'error'
             this.setState({
-                answerState: { [answerId]: 'error' }
+                answerState: { [answerId]: 'error' },
+                results
             })
         }
     }
@@ -77,7 +84,10 @@ class Qiuz extends Component {
                     <h1>Дайте відповіді на запитання</h1>
                     {
                         this.state.isFinished
-                        ? <FinishedQiuz />
+                        ? <FinishedQiuz 
+                           results={this.state.results}
+                           qiuz={this.state.qiuz}
+                        />
                         : 
                         <ActiveQiuz
                         onAnswerClick={this.onAnswerClickHandler}
