@@ -37,7 +37,7 @@ class Qiuz extends Component {
     onAnswerClickHandler = answerId => {
         if (this.state.answerState) {
             const key = Object.keys(this.state.answerState)[0]
-            if (this.state.answerState[key] === 'sucses') {
+            if (this.state.answerState[key] === 'success') {
                 return
             }
         }
@@ -45,17 +45,17 @@ class Qiuz extends Component {
         const question = this.state.qiuz[this.state.activeQestion]
         const results = this.state.results
         if (question.rightAnswerId === answerId) {
-            if(!results[answerId]) {
-                results[answerId] = 'sucses'
+            if (!results[question.id]) {
+                results[question.id] = 'success'
             }
             this.setState({
-                answerState: { [answerId]: 'sucses' },
+                answerState: { [answerId]: 'success' },
                 results
             })
             const timeout = window.setTimeout(() => {
                 if (this.isQiuzFinished()) {
                     this.setState({
-                       isFinished: true
+                        isFinished: true
                     })
                 } else {
                     this.setState({
@@ -66,7 +66,7 @@ class Qiuz extends Component {
                 window.clearTimeout(timeout)
             }, 1000)
         } else {
-            results[answerId] = 'error'
+            results[question.id] = 'error'
             this.setState({
                 answerState: { [answerId]: 'error' },
                 results
@@ -77,6 +77,14 @@ class Qiuz extends Component {
     isQiuzFinished() {
         return this.state.activeQestion + 1 === this.state.qiuz.length
     }
+    retryHendler = () => {
+        this.setState({
+            activeQestion: 0,
+            answerState: null,
+            isFinished: false,
+            results: {}
+        })
+    }
     render() {
         return (
             <div className={classes.Qiuz} >
@@ -84,19 +92,20 @@ class Qiuz extends Component {
                     <h1>Дайте відповіді на запитання</h1>
                     {
                         this.state.isFinished
-                        ? <FinishedQiuz 
-                           results={this.state.results}
-                           qiuz={this.state.qiuz}
-                        />
-                        : 
-                        <ActiveQiuz
-                        onAnswerClick={this.onAnswerClickHandler}
-                        answers={this.state.qiuz[this.state.activeQestion].answers}
-                        question={this.state.qiuz[this.state.activeQestion].question}
-                        qiuzLenght={this.state.qiuz.length}
-                        answerNamber={this.state.activeQestion + 1}
-                        state={this.state.answerState}
-                    />
+                            ? <FinishedQiuz
+                                results={this.state.results}
+                                qiuz={this.state.qiuz}
+                                onRetry={this.retryHendler}
+                            />
+                            :
+                            <ActiveQiuz
+                                onAnswerClick={this.onAnswerClickHandler}
+                                answers={this.state.qiuz[this.state.activeQestion].answers}
+                                question={this.state.qiuz[this.state.activeQestion].question}
+                                qiuzLenght={this.state.qiuz.length}
+                                answerNamber={this.state.activeQestion + 1}
+                                state={this.state.answerState}
+                            />
                     }
                 </div>
             </div>
