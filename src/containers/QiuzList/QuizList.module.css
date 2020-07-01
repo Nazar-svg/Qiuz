@@ -1,0 +1,26 @@
+.QiuzList {
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    flex-grow: 1;
+    width: 100%;
+    background: linear-gradient(90deg, #fd3583 0%, #F0576c 37%, #f79cbd 100% );
+}
+.QiuzList{
+    color: #fff;
+}
+.QiuzList ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.QiuzList li {
+    margin-bottom: 10px;
+}
+.QiuzList li a {
+    text-decoration: none;
+    color: #fff;
+}
+.QiuzList li a:hover {
+    color: grey;
+}

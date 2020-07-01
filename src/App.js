@@ -11,8 +11,8 @@ function App() {
     <Layout>
       <Switch>
         <Route path="/auth" component={Auth}/>
-        <Route path="/quiz-creator" component={QiuzCreator}/>
-        <Route path="/quiz:id" component={Qiuz}/>
+        <Route path="/qiuz-creator" component={QiuzCreator}/>
+        <Route path="/qiuz/:id" component={Qiuz}/>
         <Route path="/" component={QiuzLIst}/>
       </Switch>
     </Layout>
