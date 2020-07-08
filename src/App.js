@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from './hoc/Layout/Layout'
-import {Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Qiuz from './containers/Qiuz/Qiuz'
 import QiuzLIst from './containers/QiuzList/QiuzList'
 import Auth from './containers/Auth/Auth'
@@ -10,10 +10,12 @@ function App() {
   return (
     <Layout>
       <Switch>
-        <Route path="/auth" component={Auth}/>
-        <Route path="/qiuz-creator" component={QiuzCreator}/>
-        <Route path="/qiuz/:id" component={Qiuz}/>
-        <Route path="/" component={QiuzLIst}/>
+      <Route path='/auth' component={Auth}/>
+        <Route path='/quiz-creator' component={QiuzCreator} />
+        <Route path='/quiz/:id' component={Qiuz} />
+        {/* <Route path='/logout' component={Logout}/> */}
+        <Route path='/' exact component={QiuzLIst} />
+        {/* <Redirect to='/'/> */}
       </Switch>
     </Layout>
   );

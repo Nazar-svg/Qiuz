@@ -1,0 +1,22 @@
+.QiuzCreator{
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+    flex-grow: 1;
+    width: 100%;
+    background: linear-gradient(270deg, #f0613c 0%, #f7284c 100% );
+}
+.QiuzCreator > div {
+    width: 100%;
+    max-width: 600px;
+    padding: 0 20px;
+}
+.QiuzCreator h1 {
+    text-align: center;
+}
+.QiuzCreator form {
+    background: #eee;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, .5);
+    padding: 15px;
+    border-radius: 7px;
+}
