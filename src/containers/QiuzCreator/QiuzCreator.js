@@ -26,7 +26,7 @@ function createFormControl() {
 }
 export default class QiuzCreator extends Component {
     state = {
-        quiz: [],
+        qiuz: [],
         isFormValid: false,
         rightAnswerId: 1,
         formControl: createFormControl()
@@ -38,9 +38,36 @@ export default class QiuzCreator extends Component {
     }
     addQestionHandler = event => {
         event.preventDefault()
-    }
-    createQuizHandler = () => {
 
+        const qiuz = this.state.qiuz.concat()
+        const index = qiuz.length + 1
+        const { question, option1, option2, option3, option4 } = this.state.formControl
+        const questionItem = {
+            question: question.value,
+            id: index,
+            rightAnswerId: this.state.rightAnswerId,
+            answers: [
+                { text: option1.value, id: option1.id },
+                { text: option2.value, id: option2.id },
+                { text: option3.value, id: option3.id },
+                { text: option4.value, id: option4.id }
+            ]
+        }
+        qiuz.push(questionItem)
+
+        this.setState({
+            qiuz,
+            isFormValid: false,
+            rightAnswerId: 1,
+            formControl: createFormControl()
+
+        })
+    }
+    createQuizHandler = event => {
+        event.preventDefault()
+
+        console.log(this.state.qiuz)
+        //    todo:sRVERRRRRRRRRRF
     }
     changeHandler = (value, controlName) => {
         const formControl = { ...this.state.formControl }
@@ -113,7 +140,7 @@ export default class QiuzCreator extends Component {
                         <Button
                             type="success"
                             onClick={this.createQuizHandler}
-                            disabled={this.state.quiz.length === 0}
+                            disabled={this.state.qiuz.length === 0}
                         >
                             Створити тест
                     </Button>
