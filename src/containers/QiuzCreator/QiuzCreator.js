@@ -4,6 +4,7 @@ import Button from '../../components/UI/Button/Button'
 import Select from '../../components/UI/Select/Select'
 import { createControl, validate, validateForm } from '../../form/formFramework'
 import Input from '../../components/UI/Input/Input'
+import axios from 'axios'
 
 function createOptionControl(number) {
     return createControl({
@@ -26,7 +27,7 @@ function createFormControl() {
 }
 export default class QiuzCreator extends Component {
     state = {
-        qiuz: [],
+        quiz: [],
         isFormValid: false,
         rightAnswerId: 1,
         formControl: createFormControl()
@@ -39,8 +40,8 @@ export default class QiuzCreator extends Component {
     addQestionHandler = event => {
         event.preventDefault()
 
-        const qiuz = this.state.qiuz.concat()
-        const index = qiuz.length + 1
+        const quiz = this.state.quiz.concat()
+        const index = quiz.length + 1
         const { question, option1, option2, option3, option4 } = this.state.formControl
         const questionItem = {
             question: question.value,
@@ -53,22 +54,31 @@ export default class QiuzCreator extends Component {
                 { text: option4.value, id: option4.id }
             ]
         }
-        qiuz.push(questionItem)
+        quiz.push(questionItem)
 
         this.setState({
-            qiuz,
+            quiz,
             isFormValid: false,
             rightAnswerId: 1,
             formControl: createFormControl()
 
         })
     }
-    createQuizHandler = event => {
+    createQuizHandler = async event => {
         event.preventDefault()
-
-        console.log(this.state.qiuz)
-        //    todo:sRVERRRRRRRRRRF
+        try {
+            await axios.post('https://react-qiuz-87cdc.firebaseio.com/quizes.json', this.state.quiz)
+            this.setState({
+                quiz: [],
+                isFormValid: false,
+                rightAnswerId: 1,
+                formControl: createFormControl()
+            })
+        } catch (e) {
+            console.log(e)
+        }
     }
+
     changeHandler = (value, controlName) => {
         const formControl = { ...this.state.formControl }
         const control = { ...formControl[controlName] }
@@ -140,7 +150,7 @@ export default class QiuzCreator extends Component {
                         <Button
                             type="success"
                             onClick={this.createQuizHandler}
-                            disabled={this.state.qiuz.length === 0}
+                            disabled={this.state.quiz.length === 0}
                         >
                             Створити тест
                     </Button>

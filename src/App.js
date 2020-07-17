@@ -13,9 +13,7 @@ function App() {
       <Route path='/auth' component={Auth}/>
         <Route path='/quiz-creator' component={QiuzCreator} />
         <Route path='/quiz/:id' component={Qiuz} />
-        {/* <Route path='/logout' component={Logout}/> */}
         <Route path='/' exact component={QiuzLIst} />
-        {/* <Redirect to='/'/> */}
       </Switch>
     </Layout>
   );
