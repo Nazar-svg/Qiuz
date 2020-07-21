@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from './hoc/Layout/Layout'
 import { Route, Switch } from 'react-router-dom';
-import Qiuz from './containers/Qiuz/Qiuz'
+import Qiuz from './containers/Quiz/Quiz'
 import QiuzLIst from './containers/QiuzList/QiuzList'
 import Auth from './containers/Auth/Auth'
 import QiuzCreator from './containers/QiuzCreator/QiuzCreator'

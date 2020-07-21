@@ -13,7 +13,7 @@ const FinishedQiuz = props => {
     return (
         <div className={classes.FinishedQiuz} >
             <ul>
-                {props.qiuz.map((qiuzItem, index) => {
+                {props.quiz.map((qiuzItem, index) => {
                     const cls = [
                         'fa',
                         props.results[qiuzItem.id] === 'error' ? 'fa-times' : 'fa-check',
@@ -31,7 +31,7 @@ const FinishedQiuz = props => {
                 }
                 )}
             </ul>
-            <p>правильно {successCount} for {props.qiuz.length}</p>
+            <p>правильно {successCount} for {props.quiz.length}</p>
             <div>
                 <Button onClick={props.onRetry} type='primary'>Повторити</Button>
                 <Link to="/">
