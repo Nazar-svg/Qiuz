@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import classes from './QuizList.module.css'
 import { NavLink } from 'react-router-dom'
 import Loader from '../../components/UI/Loader/Loader'
-import {fetchQuizes} from '../../store/actions/quiz'
+import { fetchQuizes } from '../../store/actions/quiz'
 import { connect } from 'react-redux'
 
- class QiuzList extends Component {
+class QiuzList extends Component {
 
 
- 
+
     renderQiuzes() {
         return this.props.quizes.map(quiz => {
             return (
@@ -25,7 +25,7 @@ import { connect } from 'react-redux'
     componentDidMount() {
         this.props.fetchQuizes()
 
-       
+
     }
     render() {
         return (
@@ -51,11 +51,11 @@ function mapStateToProps(state) {
     return {
         quizes: state.quiz.quizes,
         loading: state.quiz.loading
-    } 
+    }
 }
 function mapDispatchToProps(dispatch) {
-    return{
-      fetchQuizes: () => dispatch(fetchQuizes())
+    return {
+        fetchQuizes: () => dispatch(fetchQuizes())
     }
 }
 
